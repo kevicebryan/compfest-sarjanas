@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../Button";
 import { Form, Result, Wrapper } from "./style";
+import { API_URL } from "@/util/constants";
 
 const Ask: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -10,15 +11,27 @@ const Ask: React.FC = () => {
     setQuery(e.target.value);
   };
 
+  const fetchResponse = async (query: string) => {
+    try {
+      const res = await fetch(`${API_URL}?query=${encodeURIComponent(query)}`);
+      if (!res.ok) {
+        throw new Error("Failed to fetch the response");
+      }
+      const data = await res.json();
+      return data.answer;
+    } catch (error) {
+      console.error("Error fetching the response:", error);
+      return "An error occurred while fetching the response.";
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim() === "") return;
 
-    // Simulate an API call to get the response
-    // Replace this with your actual API call to ChatGPT or another service
-    const simulatedResponse = `You asked: ${query}`;
-    setResponse(simulatedResponse);
-    setQuery(""); // Clear the input field after submission
+    const apiResponse = await fetchResponse(query);
+    setResponse(apiResponse);
+    setQuery("");
   };
 
   return (
@@ -33,7 +46,7 @@ const Ask: React.FC = () => {
           placeholder="Ask something..."
           value={query}
           onChange={handleInputChange}
-        />{" "}
+        />
         <Button label="Ask" isOnSubmit />
       </Form>
     </Wrapper>
