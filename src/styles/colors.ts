@@ -8,10 +8,10 @@ export const tertiary = "#efefef";
 export const disabled_color = "#DDD";
 export const disabled_color2 = "#C2C1C5";
 
-export const accent_dark = "#1252AA";
+export const accent_dark = "#0047d7";
 export const accent_light = "#EEF2FF";
 
-export const accent = "#0E54AC";
+export const accent = "#007bff";
 export const accent2 = "#70A1FF";
 export const accent3 = "#AFC8FF";
 

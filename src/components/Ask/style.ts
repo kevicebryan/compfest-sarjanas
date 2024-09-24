@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   gap: 32px;
 `;
 
-export const Result = styled.textarea`
+export const Result = styled.div`
   width: 100%;
   height: 60vh;
   max-height: 600px;
@@ -21,6 +21,8 @@ export const Result = styled.textarea`
   line-height: 1.5;
   resize: none;
   color: white;
+  font-family: monospace;
+  overflow-y: scroll;
 `;
 
 export const Form = styled.form`
@@ -55,5 +57,33 @@ export const Form = styled.form`
   & > button {
     height: 56px;
     min-width: 120px;
+  }
+`;
+
+export const OptionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+`;
+
+interface OptionProps {
+  isChosen: boolean;
+}
+
+export const Option = styled.div<OptionProps>`
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: #007bff;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: ease-in-out 0.2s;
+  opacity: ${({ isChosen }) => (isChosen ? 1 : 0.25)};
+  &:hover {
+    opacity: 1;
   }
 `;
